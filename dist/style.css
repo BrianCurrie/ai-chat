@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#chatContainer {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid black;
+}
+
+#chatHistory {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+#inputContainer {
+    align-self: flex-end;
+}

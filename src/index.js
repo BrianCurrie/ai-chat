@@ -1,1 +1,3 @@
-console.log("Hello world");
+import { init } from './chat.js';
+
+init();
