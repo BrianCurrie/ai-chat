@@ -20,10 +20,21 @@ body {
 #chatContainer {
     display: flex;
     flex-direction: column;
-    width: max-content;
+    width: 280px;
     height: 300px;
     background-color: #fff;
     border: 1px solid black;
+}
+
+#inputContainer {
+    display: flex;
+    width: 100%;
+    align-self: flex-end;
+}
+
+#textInput {
+    min-width: 0;
+    flex-grow: 1;
 }
 
 #chatHistory {
@@ -34,6 +45,27 @@ body {
     overflow-y: scroll;
 }
 
-#inputContainer {
+.msg {
+    width: max-content;
+    max-width: 80%;
+    word-wrap: break-word;
+    padding: 3px;
+    margin: 3px 0;
+}
+
+.userMsg {
+    background-color: lightblue;
+}
+
+.botMsg {
     align-self: flex-end;
+    background-color: pink;
+}
+
+#sentiment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    min-height: 1.5rem;
 }
