@@ -9,21 +9,39 @@ body {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     width: 100vw;
+    background: #6e81a7;
 }
 
 #chatContainer {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
     display: flex;
     flex-direction: column;
     width: 280px;
-    height: 300px;
     background-color: #fff;
     border: 1px solid black;
+}
+
+#nameBarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: #2e344e;
+    color: #fff;
+}
+
+#name {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 5px;
+}
+
+#minimize {
+    cursor: pointer;
+    padding: 0 5px 5px 0;
 }
 
 #inputContainer {
@@ -40,7 +58,7 @@ body {
 #chatHistory {
     display: flex;
     flex-direction: column-reverse;
-    height: 100%;
+    height: 250px;
     padding: 5px;
     overflow-y: scroll;
 }
@@ -63,9 +81,30 @@ body {
 }
 
 #sentiment {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    min-height: 1.5rem;
+    width: 400px;
+    overflow: auto;
+}
+
+#sentiment table {
+    background-color: #fff;
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+#sentiment table th {
+    border: 1px solid black;
+    padding: 5px;
+    width: 50%;
+}
+
+#sentiment table td {
+    border: 1px solid black;
+    padding: 5px;
+    width: 50%;
+    word-wrap: break-word;
+}
+
+.pointer {
+    cursor: pointer;
 }
