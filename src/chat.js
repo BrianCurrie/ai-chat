@@ -45,7 +45,7 @@ function init() {
         windowActive = true;
     });
 
-    displayMsg(response.greeting(), 'bot');
+    displayMsg(response.reply(''), 'bot');
 }
 
 function displayData(text) {
@@ -78,10 +78,8 @@ function displayData(text) {
 
         if (Array.isArray(sentimentData[prop])) {
             let str = arrToReducedStr(sentimentData[prop]);
-
-            console.log(str);
-
             data.innerText = str;
+            console.log(sentimentData[prop]);
         } else {
             data.innerText = sentimentData[prop];
         }

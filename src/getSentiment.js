@@ -24,6 +24,7 @@ function parseData(sentiment, compendium) {
         politeness: compendium.politeness,
         dirtiness: compendium.dirtiness,
         negated: compendium.negated,
+        types: compendium.types,
         negative_words: sentiment.negative,
         positive_words: sentiment.positive,
     };
