@@ -3,14 +3,27 @@ const response = (() => {
         `Hello! It's nice to meet you. How has your day been?`;
 
     const reply = (sentimentData) => {
+        let msg = '';
+
         switch (sentimentData.label) {
             case 'negative':
-                return `I'm sorry to hear that.`;
+                msg = `I'm sorry to hear that.`;
+                break;
             case 'positive':
-                return `I'm glad to hear that!`;
+                msg = `I'm glad to hear that!`;
+                break;
             case 'neutral':
-                return `Neutral`;
+                msg = `Okay, would you mind telling me more?`;
+                break;
         }
+
+        if (sentimentData.dirtiness > 0) {
+            return `Please do not use that language here.`;
+        } else if (sentimentData.politeness > 0) {
+            msg += ` Thank you more being so polite.`;
+        }
+
+        return msg;
     };
 
     return { greeting, reply };
