@@ -64,15 +64,41 @@ body {
 }
 
 .msg {
+    position: relative;
     width: max-content;
     max-width: 80%;
     word-wrap: break-word;
-    padding: 3px;
-    margin: 3px 0;
+    padding: 5px;
+    margin: 4px 8px;
+    border-radius: 5px;
 }
 
 .userMsg {
     background-color: lightblue;
+}
+
+.userMsg .msgInner::before {
+    content: '';
+    position: absolute;
+    top: 55%;
+    right: 100%;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-right: 8px solid lightblue;
+    border-bottom: 5px solid transparent;
+}
+
+.botMsg .msgInner::before {
+    content: '';
+    position: absolute;
+    top: 55%;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-left: 8px solid pink;
+    border-bottom: 5px solid transparent;
 }
 
 .botMsg {

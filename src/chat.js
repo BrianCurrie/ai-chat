@@ -1,4 +1,7 @@
 import { getSentiment } from './getSentiment';
+import { response } from './response';
+
+let windowActive = false;
 
 function init() {
     const submitBtn = document.getElementById('submitBtn');
@@ -10,7 +13,8 @@ function init() {
         const text = textInput.value;
         textInput.value = '';
         displayData(text);
-        displayUserMessage(text);
+        displayMsg(text, 'user');
+        displayMsg(response.reply(getSentiment(text)), 'bot');
     });
 
     textInput.addEventListener('keydown', (e) => {
@@ -18,7 +22,8 @@ function init() {
             const text = textInput.value;
             textInput.value = '';
             displayData(text);
-            displayUserMessage(text);
+            displayMsg(text, 'user');
+            displayMsg(response.reply(getSentiment(text)), 'bot');
         }
     });
 
@@ -35,6 +40,12 @@ function init() {
             }
         }
     });
+
+    window.addEventListener('focus', () => {
+        windowActive = true;
+    });
+
+    displayMsg(response.greeting(), 'bot');
 }
 
 function displayData(text) {
@@ -55,8 +66,9 @@ function displayData(text) {
     propertyHeader.innerText = 'Property';
     dataHeader.innerText = 'Data';
 
-    table.appendChild(propertyHeader);
-    table.appendChild(dataHeader);
+    tableHeaders.appendChild(propertyHeader);
+    tableHeaders.appendChild(dataHeader);
+    table.appendChild(tableHeaders);
 
     for (let prop in sentimentData) {
         const row = document.createElement('tr');
@@ -65,11 +77,11 @@ function displayData(text) {
         property.innerText = prop;
 
         if (Array.isArray(sentimentData[prop])) {
-            let filtered = filterArr(sentimentData[prop]);
+            let str = arrToReducedStr(sentimentData[prop]);
 
-            console.log(filtered);
+            console.log(str);
 
-            data.innerText = filtered; //insert world list cleaned up
+            data.innerText = str;
         } else {
             data.innerText = sentimentData[prop];
         }
@@ -83,44 +95,56 @@ function displayData(text) {
     display.appendChild(table);
 }
 
-function filterArr(arr) {
-    let tempArr = [];
+function arrToReducedStr(arr) {
     let obj = {};
+    let str = '';
 
     for (let ele of arr) {
-        if (tempArr.includes(ele)) {
+        if (obj.hasOwnProperty(ele)) {
             obj[ele] += 1;
         } else {
-            tempArr.push(ele);
             obj[ele] = 1;
         }
     }
 
-    arr = [];
-
     for (let prop in obj) {
         if (obj[prop] < 2) {
-            arr.unshift(`${prop}`);
+            str = `${prop}, ` + str;
         } else {
-            arr.unshift(`${prop}(x${obj[prop]})`);
+            str = `${prop}(x${obj[prop]}), ` + str;
         }
     }
 
-    return arr.join(', ');
+    return str.slice(0, -2);
 }
 
-function displayUserMessage(msg) {
+function displayMsg(msg, sender) {
     if (msg.length <= 0) {
         return -1;
     }
     const chat = document.getElementById('chatHistory');
     const msgEle = document.createElement('div');
-    msgEle.innerText = msg;
+    const msgEleInner = document.createElement('div');
     msgEle.classList.add('msg');
-    msgEle.classList.add('userMsg');
+    msgEleInner.innerText = msg;
+    msgEleInner.classList.add('msgInner');
+    msgEle.prepend(msgEleInner);
 
-    chat.prepend(msgEle);
-    msgEle.scrollIntoView();
+    if (sender === 'user') {
+        msgEle.classList.add('userMsg');
+        chat.prepend(msgEle);
+        msgEle.scrollIntoView();
+    } else {
+        const audioObj = new Audio('./audio/notification_alert.mp3');
+        setTimeout(function () {
+            if (windowActive) {
+                audioObj.play();
+            }
+            msgEle.classList.add('botMsg');
+            chat.prepend(msgEle);
+            msgEle.scrollIntoView();
+        }, 2000);
+    }
 }
 
 export { init };
