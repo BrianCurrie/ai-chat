@@ -55,13 +55,38 @@ body {
 
 #inputContainer {
     display: flex;
-    width: 100%;
     align-self: flex-end;
+    width: 100%;
+    padding: 8px;
+    background-color: lightgray;
 }
 
 #textInput {
     min-width: 0;
     flex-grow: 1;
+}
+
+#sendBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2e344e;
+    height: 1.8rem;
+    width: 1.8rem;
+    border-radius: 15px;
+    border: none;
+    padding: 3px 3px 3px 6px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+#sendBtn:hover {
+    background-color: #3b436d;
+}
+
+#sendBtn img {
+    width: 80%;
+    height: 80%;
 }
 
 #chatHistory {

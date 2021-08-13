@@ -60,7 +60,9 @@ function initialReply(sentimentData) {
 function liveChatResponse(sentimentData) {
     let msg = '';
 
-    if (sentimentData.types.includes('approval')) {
+    if (sentimentData.types === undefined) {
+        msg = `Thank you for your time! If you have any other questions please contact customer support.`;
+    } else if (sentimentData.types.includes('approval')) {
         msg = `Perfect! Transferring you to our live chat now.`;
     } else if (sentimentData.types.includes('refusal')) {
         msg = `Okay! Feel free to contact one of our live representatives if you change your mind.`;

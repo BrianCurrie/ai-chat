@@ -4,29 +4,20 @@ import { response } from './response';
 let windowActive = false;
 
 function init() {
-    const submitBtn = document.getElementById('submitBtn');
+    const sendBtn = document.getElementById('sendBtn');
     const textInput = document.getElementById('textInput');
     const chat = document.getElementById('chatHistory');
     const namebar = document.getElementById('nameBarContainer');
 
-    submitBtn.addEventListener('click', () => {
-        const text = textInput.value;
-        textInput.value = '';
-        displayData(text);
-        displayMsg(text, 'user');
-        displayMsg(response.reply(getSentiment(text)), 'bot');
-    });
+    sendBtn.addEventListener('click', msgEvent);
 
     textInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            const text = textInput.value;
-            textInput.value = '';
-            displayData(text);
-            displayMsg(text, 'user');
-            displayMsg(response.reply(getSentiment(text)), 'bot');
+            msgEvent();
         }
     });
 
+    // Minimize or reopen chat
     namebar.addEventListener('click', (e) => {
         if (e.target.id === 'minimize') {
             if (chat.style.display !== 'none') {
@@ -41,11 +32,23 @@ function init() {
         }
     });
 
+    // Checks if the window is ever in focus so we can play audio without autoplay error
     window.addEventListener('focus', () => {
         windowActive = true;
     });
 
     displayMsg(response.reply(''), 'bot');
+}
+
+function msgEvent() {
+    const text = textInput.value;
+    const sentimentData = getSentiment(text);
+    textInput.value = '';
+    if (sentimentData !== -1) {
+        displayData(text);
+        displayMsg(text, 'user');
+        displayMsg(response.reply(sentimentData), 'bot');
+    }
 }
 
 function displayData(text) {
@@ -93,6 +96,10 @@ function displayData(text) {
     display.appendChild(table);
 }
 
+// Removes duplicates from an array and returns
+// a string representation of the array while
+// counting duplicates. Ex:
+// ['test', 'test', 'test'] -> 'test(x3)'
 function arrToReducedStr(arr) {
     let obj = {};
     let str = '';
