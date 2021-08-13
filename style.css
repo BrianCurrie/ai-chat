@@ -9,20 +9,29 @@ body {
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     width: 100vw;
     background: #6e81a7;
 }
 
+#mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: min-content;
+}
+
 #chatContainer {
-    position: absolute;
-    right: 50px;
-    bottom: 50px;
     display: flex;
     flex-direction: column;
     width: 280px;
     background-color: #fff;
     border: 1px solid black;
+    margin-left: 80px;
 }
 
 #nameBarContainer {
@@ -133,4 +142,20 @@ body {
 
 .pointer {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 950px) {
+    #mainContainer {
+        flex-direction: column;
+    }
+
+    #chatContainer {
+        margin: 0 0 20px 0;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #sentiment {
+        width: 100%;
+    }
 }
