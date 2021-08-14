@@ -43,7 +43,7 @@ function initialReply(sentimentData) {
         case 'positive':
             msg = `I'm glad to hear that! Could we help to make your day even better?`;
             break;
-        case 'neutral':
+        default:
             msg = `Okay, would you mind telling me more?`;
             break;
     }

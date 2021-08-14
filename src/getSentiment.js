@@ -9,11 +9,9 @@ function getSentiment(str) {
 
     const input = str.toLowerCase();
     const sentiment = new Sentiment();
-    const result = sentiment.analyze(input);
+    const sentAnalysis = sentiment.analyze(input);
     const compendProfile = Compendium.analyse(input)[0].profile;
-    const data = parseData(result, compendProfile);
-
-    console.log(result, compendProfile);
+    const data = parseData(sentAnalysis, compendProfile);
     return data;
 }
 

@@ -82,7 +82,6 @@ function displayData(text) {
         if (Array.isArray(sentimentData[prop])) {
             let str = arrToReducedStr(sentimentData[prop]);
             data.innerText = str;
-            console.log(sentimentData[prop]);
         } else {
             data.innerText = sentimentData[prop];
         }
