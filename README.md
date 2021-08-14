@@ -1,5 +1,7 @@
 # ai-chat
 
+[Live Demo ✔️](https://briancurrie.github.io/ai-chat/)
+
 A rudimentary chat ai using natural language processing and sentiment analysis. 
 
 ![Screenshot](https://i.imgur.com/7N8HE4y.png)
